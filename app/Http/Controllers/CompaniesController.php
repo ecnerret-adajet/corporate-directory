@@ -28,12 +28,9 @@ class CompaniesController extends Controller
     
     public function index(Company $company)
     {
-        $directories = $company->directories;
 
-        
-  
+        $directories = $company->directories()->paginate(12);
         $departments = Department::lists('name','id');
-        $companies = Company::lists('name','id');
         $companies = Company::with('directories')->get();
      
         

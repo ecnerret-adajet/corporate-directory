@@ -10,18 +10,7 @@
   clear: both;
 }
 
-body {
-  background: #fff;
-  color: #7b7b7b;
-  font-weight: 400;
-  font-size: 16px;
-  font-family: 'Raleway', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
-  overflow-y: scroll;
-  /* force scroll to appear */
-}
+
 
 /* helper class when showing content */
 .noscroll {
@@ -56,7 +45,6 @@ button:focus {
   height: 100vh;
   top: 0;
   left: 0;
-  padding: 2em 1em;
 }
 
 .list-group-item {
@@ -290,6 +278,7 @@ button:focus {
   margin-left: auto;
 }
 
+/*
 .dropdown {
   font-weight: bold;
   margin-left: 5px;
@@ -302,6 +291,8 @@ button:focus {
   margin-left: 2px;
   font-size: 80%;
 }
+
+*/
 
 /* Grid item */
 .grid__item {

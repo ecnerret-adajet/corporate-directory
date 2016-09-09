@@ -135,11 +135,12 @@
 
 
                         
-             
-           <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+             <hr/>
 
-                  <a type="button" class ="btn btn-default" href="{{ URL::previous() }}" style="color: #fff;">
+           <div class="form-group">
+                            <div class="col-md-12">
+
+                  <a type="button" class ="btn btn-default" href="{{ URL::previous() }}">
                   CANCEL
                 </a>
 

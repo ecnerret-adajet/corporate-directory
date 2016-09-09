@@ -35,15 +35,13 @@ class DirectoriesController extends Controller
     public function index()
     {
         $directories = Directory::orderBy('name','asc')
-                    ->paginate(24);
-
+                    ->paginate(12);
         $directory = Directory::all();
-        $companies = Company::lists('name','id');
-        $companies = Company::with('directories')->get();
+        $companies = Company::all();
         $departments = Department::lists('name','id');
-
-        
-        return view('directories.index', compact('directories','companies','departments','directory'));
+    
+        return view('directories.index', compact('directories','companies','departments','directory'))
+        ->with('i');
     }
 
     /**
@@ -54,7 +52,7 @@ class DirectoriesController extends Controller
     public function create()
     {
         $directories = Directory::all();
-        $companies = Company::lists('name', 'id');
+        $companies = Company::all();
         $departments = Department::lists('name','id');
         
         return view('directories.create', compact('companies','departments','directories'));
