@@ -55,6 +55,16 @@ class Directory extends Model
     {
         return $this->departments->lists('id')->all();
     }
+
+    public function statuses()
+    {
+        return $this->belongsToMany('App\Status')->withTimestamp();
+    }
+
+    public function getStatusListAttribute()
+    {
+        return $this->statuses->lists('id')->all();
+    }
     
     
     

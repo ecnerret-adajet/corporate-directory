@@ -53,9 +53,10 @@ class DirectoriesController extends Controller
     {
         $directories = Directory::all();
         $companies = Company::all();
+        $statuses = Status::lists('name','id');
         $departments = Department::lists('name','id');
         
-        return view('directories.create', compact('companies','departments','directories'));
+        return view('directories.create', compact('companies','departments','directories','statuses'));
     }
 
     /**
@@ -77,10 +78,11 @@ class DirectoriesController extends Controller
 
         $directory->companies()->attach($request->input('company_list'));
         $directory->departments()->attach($request->input('department_list'));
+        $directory->statuses()->attach($request->input('status_list'));
         
         
         flashy()->success('You have added an assignee succesfully.');
-        
+        return redirect('directoriess');
         
     }
 
@@ -105,10 +107,11 @@ class DirectoriesController extends Controller
     {
         $companies = Company::lists('name', 'id');
         $departments = Department::lists('name','id');
+        $statuses = Status::lists('name','id');
         
         
         return view('directories.edit', compact(
-            'companies','departments','directory'));
+            'companies','statuses','departments','directory'));
     }
 
     /**
@@ -123,6 +126,7 @@ class DirectoriesController extends Controller
          $directory->update($request->all());
         $directory->companies()->sync((!$request->input('company_list') ? [] : $request->input('company_list')));
         $directory->departments()->sync((!$request->input('department_list') ? [] : $request->input('department_list')));
+        $directory->statuses()->sync((!$request->input('status_list') ? [] : $request->input('status_list')));
 
         if($request->hasFile('avatar')){
             $avatar = $request->file('avatar');

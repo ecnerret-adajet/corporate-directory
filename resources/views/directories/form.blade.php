@@ -133,6 +133,19 @@
                             </div>
     </div>
 
+                     <div class="form-group">
+                            <label class="col-md-4 control-label"> 
+                            {!! Form::label('statuses_list', 'Status:')  !!} 
+                            </label>
+
+                            <div class="col-md-6 selectContainer">
+                    {!! Form::select('statuses_list[]', $statuses, null, ['class' => 'form-control', 'placeholder' => '-- Select Status --']) !!}
+                                
+                                
+                           
+                            </div>
+                        </div>
+
 
                         
              <hr/>
