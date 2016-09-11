@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('directories','DirectoriesController');
     Route::get('/search', 'PagesController@getsearch');
     Route::get('company/{companies}', 'CompaniesController@index');
+    Route::get('status/{statuses}', 'StatusesController@index');
 
     Route::resource('users','UserController');
  Route::get('roles',['as'=>'roles.index','uses'=>'RoleController@index','middleware' => ['permission:role-list|role-create|role-edit|role-delete']]);

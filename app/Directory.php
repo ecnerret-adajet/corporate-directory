@@ -58,7 +58,7 @@ class Directory extends Model
 
     public function statuses()
     {
-        return $this->belongsToMany('App\Status')->withTimestamp();
+        return $this->belongsToMany('App\Status')->withTimestamps();
     }
 
     public function getStatusListAttribute()

@@ -167,6 +167,28 @@
               </div>
           </div>
 
+           <div class="row">
+              <div class="col-md-4 col-xs-4 text-right">
+                  <i class="fa fa-volume-control-phone fa-icon" aria-hidden="true"></i>
+              </div>
+
+              <div class="col-md-8 col-xs-8 text-left box-end">
+              <span class="{{ ($item->local == null ? 'no-data' : '')}}"> 
+                  @foreach($item->statuses as $status)
+                     
+                      @if (count($status->name) === 0)
+                          No Status
+                      @else
+                        $status->name
+                      @endif  
+
+                        @endforeach 
+                 
+                
+              </span>
+              </div>
+          </div>
+
            
   </div>
 </div>

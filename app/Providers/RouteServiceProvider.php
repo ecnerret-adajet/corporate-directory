@@ -40,6 +40,11 @@ class RouteServiceProvider extends ServiceProvider
             return \App\Department::where('name',$name)->firstOrFail();
         
         });
+
+           $router->bind('statuses', function($name){
+            return \App\Status::where('name',$name)->firstOrFail();
+        
+        });
     }
 
     /**

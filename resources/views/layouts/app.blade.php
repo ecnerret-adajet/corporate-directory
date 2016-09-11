@@ -147,6 +147,26 @@
                             <!-- /.nav-second-level -->
                         </li>
 
+                           <li>
+                            <a href="#"><i class="fa fa-database" aria-hidden="true"></i> Employee Status<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                            @for($i=0; $i <= 2; $i++)
+                                <li>
+                                @foreach($statuses->slice($i,1) as $status)
+                                    <a href="{{url('status/'.$status->name)}}"><i class="fa fa-tags" aria-hidden="true"></i>
+                                     {{$status->name}} 
+                                      <span class="badge pull-right">{{ $status->directories->count() }}  </span>
+                                    </a>
+                                  @endforeach
+                                </li>
+                            @endfor
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+
+
+
                 
                 
                     </ul>

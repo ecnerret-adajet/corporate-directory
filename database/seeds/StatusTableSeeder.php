@@ -11,7 +11,7 @@ class StatusTableSeeder extends Seeder
      */
     public function run()
     {
-           DB::table('companies')->insert([
+           DB::table('statuses')->insert([
           array('name'=>'Resigned'),
           array('name'=>'Retired'),
          

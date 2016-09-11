@@ -13,6 +13,7 @@ use App\Directory;
 use App\User;
 use App\Company;
 use App\Department;
+use App\Status;
 use Flash;
 use Gate;
 use Image;
@@ -38,9 +39,10 @@ class DirectoriesController extends Controller
                     ->paginate(12);
         $directory = Directory::all();
         $companies = Company::all();
+        $statuses = Status::all();
         $departments = Department::lists('name','id');
     
-        return view('directories.index', compact('directories','companies','departments','directory'))
+        return view('directories.index', compact('directories','companies','departments','directory','statuses'))
         ->with('i');
     }
 
