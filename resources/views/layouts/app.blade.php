@@ -77,12 +77,7 @@
                        
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{{url('logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -130,7 +125,26 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+
+                             <li>
+                            <a href="#"><i class="fa fa-database" aria-hidden="true"></i> Employee Status<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                            @for($i=0; $i <= 2; $i++)
+                                <li>
+                                @foreach($statuses->slice($i,1) as $status)
+                                    <a href="{{url('status/'.$status->name)}}"><i class="fa fa-tags" aria-hidden="true"></i>
+                                     {{$status->name}} 
+                                      <span class="badge pull-right">{{ $status->directories->count() }}  </span>
+                                    </a>
+                                  @endforeach
+                                </li>
+                            @endfor
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                   
+
+                  @permission('role-create')
                        
                         <li>
                             <a href="#"><i class="fa fa-database" aria-hidden="true"></i>  User Management<span class="fa arrow"></span></a>
@@ -147,23 +161,11 @@
                             <!-- /.nav-second-level -->
                         </li>
 
-                           <li>
-                            <a href="#"><i class="fa fa-database" aria-hidden="true"></i> Employee Status<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                            @for($i=0; $i <= 2; $i++)
-                                <li>
-                                @foreach($statuses->slice($i,1) as $status)
-                                    <a href="{{url('status/'.$status->name)}}"><i class="fa fa-tags" aria-hidden="true"></i>
-                                     {{$status->name}} 
-                                      <span class="badge pull-right">{{ $status->directories->count() }}  </span>
-                                    </a>
-                                  @endforeach
-                                </li>
-                            @endfor
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+              @endpermission
 
+                      
+
+              
 
 
 

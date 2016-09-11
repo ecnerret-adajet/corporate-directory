@@ -9,6 +9,9 @@ use App\User;
 use App\Directory;
 use App\Company;
 use App\Department;
+use App\Status;
+use Input;
+use Excel;
 
 class PagesController extends Controller
 {
@@ -30,6 +33,7 @@ class PagesController extends Controller
       $companies = Company::with('directories')->get();
       $departments = Department::lists('name','id');
         $directory = Directory::all();
+        $statuses = Status::all();
         
         
          $directories = Directory::where('name', 'like', "%$q%")
@@ -37,7 +41,25 @@ class PagesController extends Controller
              ->appends(['q' => $q]);
        
 
-        return view('directories.index', compact('directories','q','companies','departments','directory'));
+        return view('directories.index', compact('directories','q','companies','departments','directory','statuses'));
         
+    }
+
+    public function report()
+    {
+      return view('reports');
+    }
+
+    public function exportPDF()
+    {
+      $data = Directory::get()->toArray();
+    
+    return Excel::create('itsolutionstuff_example', function($excel) use ($data) {
+    $excel->sheet('mySheet', function($sheet) use ($data)
+      {
+      $sheet->fromArray($data);
+      });
+     })->download("pdf");
+
     }
 }

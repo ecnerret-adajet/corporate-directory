@@ -25,6 +25,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/search', 'PagesController@getsearch');
     Route::get('company/{companies}', 'CompaniesController@index');
     Route::get('status/{statuses}', 'StatusesController@index');
+    Route::get('reports','PagesController@report');
+    Route::get('exportPDF','PagesController@exportPDF');
 
     Route::resource('users','UserController');
  Route::get('roles',['as'=>'roles.index','uses'=>'RoleController@index','middleware' => ['permission:role-list|role-create|role-edit|role-delete']]);

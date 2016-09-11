@@ -11,6 +11,7 @@ use App\Company;
 use App\Directory;
 use App\Department;
 use App\Role;
+use App\Status;
 use DB;
 use Hash;
 
@@ -26,8 +27,9 @@ class UserController extends Controller
     {
         $data = User::orderBy('id','DESC')->paginate(5);
         $companies = Company::all();
+        $statuses = Status::all();
 
-        return view('users.index',compact('data','companies'))
+        return view('users.index',compact('data','companies','statuses'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -38,9 +40,10 @@ class UserController extends Controller
      */
     public function create()
     {
+         $statuses = Status::all();
         $companies = Company::all();
         $roles = Role::lists('display_name','id');
-        return view('users.create',compact('roles','companies'));    
+        return view('users.create',compact('roles','companies','statuses'));    
     }
 
     /**
@@ -92,10 +95,11 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $companies = Company::all();
+         $statuses = Status::all();
         $roles = Role::lists('display_name','id');
         $userRole = $user->roles->lists('id','id')->toArray();
 
-        return view('users.edit',compact('user','roles','userRole','companies'));
+        return view('users.edit',compact('user','roles','userRole','companies','statuses'));
     }
 
     /**

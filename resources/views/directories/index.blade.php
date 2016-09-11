@@ -9,7 +9,9 @@
         <div class="panel panel-primary">
   <div class="panel-heading">
   			   <h3 class="panel-title">All Directories 
+           @permission('role-create')
   			   	    <a href="#" class="btn btn-info"><i class="fa fa-plus"></i> Add New</a>
+            @endpermission
   			   </h3>
   	
   </div>
@@ -202,7 +204,7 @@
 
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-
+         @permission('role-create')
           <a type="button" class="btn btn-primary round pull-left btn-sm" style="margin-right: 10px;" href="{{url ('directories/' .$item->id. '/edit') }}">
             <i class="fa fa-sliders" aria-hidden="true" style="color: #fff;"></i> Modify
           </a> 
@@ -213,6 +215,8 @@
             <a type="button" class ="formConfirm btn btn-danger btn-sm round pull-left" href="">
                 <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
             </a>
+            @endpermission
+
       </div>
 
     </div><!-- /.modal-content -->

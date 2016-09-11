@@ -11,6 +11,7 @@ use App\Company;
 use App\Directory;
 use App\Department;
 use App\Permission;
+use App\Status;
 use DB;
 
 class RoleController extends Controller
@@ -23,8 +24,9 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $companies = Company::all();
+        $statuses = Status::all();
         $roles = Role::orderBy('id','DESC')->paginate(5);
-        return view('roles.index',compact('roles','companies'))
+        return view('roles.index',compact('roles','companies','statuses'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -36,8 +38,9 @@ class RoleController extends Controller
     public function create()
     {
         $companies = Company::all();
+        $statuses = Status::all();
         $permission = Permission::get();
-        return view('roles.create',compact('permission','companies'));
+        return view('roles.create',compact('permission','companies','statuses'));
     }
 
     /**
@@ -78,12 +81,13 @@ class RoleController extends Controller
     public function show($id)
     {
         $companies = Company::all();
+        $statuses = Status::all();
         $role = Role::find($id);
         $rolePermissions = Permission::join("permission_role","permission_role.permission_id","=","permissions.id")
             ->where("permission_role.role_id",$id)
             ->get();
 
-        return view('roles.show',compact('role','rolePermissions','companies'));
+        return view('roles.show',compact('role','rolePermissions','companies','statuses'));
     }
 
     /**
@@ -95,12 +99,13 @@ class RoleController extends Controller
     public function edit($id)
     {
         $companies = Company::all();
+        $statuses = Status::all();
         $role = Role::find($id);
         $permission = Permission::get();
         $rolePermissions = DB::table("permission_role")->where("permission_role.role_id",$id)
             ->lists('permission_role.permission_id','permission_role.permission_id');
 
-        return view('roles.edit',compact('role','permission','rolePermissions','companies'));
+        return view('roles.edit',compact('role','permission','statuses','rolePermissions','companies'));
     }
 
     /**
