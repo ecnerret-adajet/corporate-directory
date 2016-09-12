@@ -101,7 +101,7 @@
             new UISearch( document.getElementById( 'sb-search' ) );
         </script>
 
-        <script src="https://npmcdn.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+        <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
     <script>
         $('.grid').masonry({
   // options...
