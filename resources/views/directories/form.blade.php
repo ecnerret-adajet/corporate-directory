@@ -12,7 +12,7 @@
     </div>
 
 
-        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">  
                         {!! Form::label('name', 'Full Name:')  !!}
                             </label>
@@ -56,14 +56,20 @@
             
             
                
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('company_list') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label"> 
                             {!! Form::label('company_list', 'Company:')  !!} 
                             </label>
 
                             <div class="col-md-6 selectContainer">
-                    {!! Form::select('company_list[]', $companies, null, ['class' => 'form-control', 'placeholder' => '-- Select a department --']) !!}
-                                
+                 
+                      {!! Form::select('company_list[]', $companiesx, null, ['class' => 'form-control', 'placeholder' => '-- Select a Company --']) !!}
+                    
+                               @if ($errors->has('company_list'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('company_list') }}</strong>
+                                    </span>
+                                @endif
                                 
                            
                             </div>
@@ -72,14 +78,20 @@
 
 
 
-   <div class="form-group">
+                          <div class="form-group{{ $errors->has('department_list[]') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label"> 
-                            {!! Form::label('department_list', 'Department:')  !!} 
+                           Department:
                             </label>
 
                             <div class="col-md-6">
-                    {!! Form::select('department_list[]', $departments, null, ['class' => 'form-control', 'placeholder' => '-- Select Company --']) !!}
-                            
+                    {!! Form::select('department_list[]', $departmentsx, null, ['class' => 'form-control']) !!}
+
+
+                               @if ($errors->has('department_list[]'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('department_list[]') }}</strong>
+                                    </span>
+                                @endif
                            
                                 
                             </div>
@@ -139,8 +151,10 @@
                             </label>
 
                             <div class="col-md-6 selectContainer">
-                    {!! Form::select('statuses_list[]', $statuses, null, ['class' => 'form-control', 'placeholder' => '-- Select Status --']) !!}
-                                
+                  
+                         {!! Form::select('statuses_list[]', $statusesx, null, ['class' => 'form-control', 'placeholder' => '-- Select Status --']) !!}
+
+                  
                                 
                            
                             </div>
@@ -157,7 +171,7 @@
                   CANCEL
                 </a>
 
-                 {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary pull-right'])  !!} 
+                 {!! Form::submit($submitButtonText, ['class' => 'btn btn-success pull-right'])  !!} 
                             </div>
                         </div>         
 

@@ -10,7 +10,8 @@
   <div class="panel-heading">
   			   <h3 class="panel-title">All Directories 
            @permission('role-create')
-  			   	    <a href="#" class="btn btn-info"><i class="fa fa-plus"></i> Add New</a>
+                <a href="{{url('directories/create')}}" class="btn btn-info"><i class="fa fa-plus"></i> Add New</a>
+  			   	    <a href="{{url('exportPDF')}}" class="btn btn-warning"><i class="fa fa-plus"></i> Export to excel</a>
             @endpermission
   			   </h3>
   	
@@ -103,6 +104,8 @@
 
             <div class="panel panel-default panel-box">
   <div class="panel-body">
+
+    @role('Administrator')
           <div class="row">
               <div class="col-md-4 col-xs-4 text-right">
                   <i class="fa fa-map-marker  fa-icon" aria-hidden="true"></i>
@@ -112,6 +115,7 @@
                 {{$item->address }}
               </div>
           </div>
+    @endrole
 
             <div class="row">
               <div class="col-md-4 col-xs-4 text-right">

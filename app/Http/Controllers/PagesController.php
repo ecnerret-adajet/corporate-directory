@@ -45,21 +45,23 @@ class PagesController extends Controller
         
     }
 
-    public function report()
-    {
-      return view('reports');
-    }
 
     public function exportPDF()
     {
+
+   
       $data = Directory::get()->toArray();
     
-    return Excel::create('itsolutionstuff_example', function($excel) use ($data) {
+    return Excel::create('export_directory', function($excel) use ($data) {
     $excel->sheet('mySheet', function($sheet) use ($data)
       {
       $sheet->fromArray($data);
       });
-     })->download("pdf");
+     })->export("xls");
+
+
 
     }
+
+    
 }

@@ -37,12 +37,11 @@ class DirectoriesController extends Controller
     {
         $directories = Directory::orderBy('name','asc')
                     ->paginate(12);
-        $directory = Directory::all();
         $companies = Company::all();
         $statuses = Status::all();
         $departments = Department::lists('name','id');
     
-        return view('directories.index', compact('directories','companies','departments','directory','statuses'))
+        return view('directories.index', compact('directories','companies','departments','statuses'))
         ->with('i');
     }
 
@@ -54,11 +53,23 @@ class DirectoriesController extends Controller
     public function create()
     {
         $directories = Directory::all();
+
         $companies = Company::all();
-        $statuses = Status::lists('name','id');
-        $departments = Department::lists('name','id');
+        $statuses = Status::all();
+        $departments = Department::all();
+
+        $companiesx = Company::lists('name','id');
+        $statusesx = Status::lists('name','id');
+        $departmentsx = Department::orderBy('id','desc')->lists('name','id');
         
-        return view('directories.create', compact('companies','departments','directories','statuses'));
+         return view('directories.create', compact('companiesx',
+            'departmentsx',
+            'statusesx',
+
+            'companies',
+            'departments',
+            'directories',
+            'statuses'));
     }
 
     /**
@@ -78,13 +89,17 @@ class DirectoriesController extends Controller
             $directory->save();
         }
 
-        $directory->companies()->attach($request->input('company_list'));
-        $directory->departments()->attach($request->input('department_list'));
-        $directory->statuses()->attach($request->input('status_list'));
+        $directory->companies()->attach((!$request->input('company_list') ? [] : $request->input('company_list')));
+        $directory->departments()->attach((!$request->input('department_list') ? [] : $request->input('department_list')));
+        $directory->statuses()->attach((!$request->input('status_list') ? [] : $request->input('status_list')));
         
         
-        flashy()->success('You have added an assignee succesfully.');
-        return redirect('directoriess');
+        $notification = array(
+            'message' => 'New Directory added succesfully!', 
+            'alert-type' => 'success'
+        );
+
+        return redirect('directories')->with($notification);
         
     }
 
@@ -107,13 +122,23 @@ class DirectoriesController extends Controller
      */
     public function edit(Directory $directory)
     {
-        $companies = Company::lists('name', 'id');
-        $departments = Department::lists('name','id');
-        $statuses = Status::lists('name','id');
+        $companies = Company::all();
+        $statuses = Status::all();
+        $departments = Department::all();
+
+        $companiesx = Company::lists('name','id');
+        $statusesx = Status::lists('name','id');
+        $departmentsx = Department::orderBy('id','desc')->lists('name','id');
+
         
-        
-        return view('directories.edit', compact(
-            'companies','statuses','departments','directory'));
+        return view('directories.edit', compact('companiesx',
+            'departmentsx',
+            'statusesx',
+
+            'companies',
+            'departments',
+            'directory',
+            'statuses'));
     }
 
     /**
@@ -126,8 +151,11 @@ class DirectoriesController extends Controller
     public function update(DirectoryRequest $request, Directory $directory)
     {
          $directory->update($request->all());
+
         $directory->companies()->sync((!$request->input('company_list') ? [] : $request->input('company_list')));
-        $directory->departments()->sync((!$request->input('department_list') ? [] : $request->input('department_list')));
+
+        $directory->departments()->sync((!$request->input('department_list') ? [] : $request->input('department_list')));  
+
         $directory->statuses()->sync((!$request->input('status_list') ? [] : $request->input('status_list')));
 
         if($request->hasFile('avatar')){

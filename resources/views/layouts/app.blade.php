@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" />
 
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+
 
      <!-- Custom CSS -->
     <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
@@ -226,6 +228,31 @@
 
    <!-- Metis Menu Plugin JavaScript -->
     <script src="{{asset('plugin/metisMenu/metisMenu.min.js')}}"></script>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+   <script>
+  @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}";
+    switch(type){
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+        
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+  @endif
+</script>
 
      <!-- JavaScripts   -->
     <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>

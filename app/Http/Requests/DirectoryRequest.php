@@ -24,7 +24,9 @@ class DirectoryRequest extends Request
     public function rules()
     {
        return [
-            'name' => 'required|min:3'
+            'name' => 'required|min:3',
+           
+
          
         ];
     }
@@ -32,7 +34,8 @@ class DirectoryRequest extends Request
     public function messages()
     {
         return [
-            'name.required' => "Employee's name is required"
-        ];
+            'name.required' => "Employee's name is required",
+
+             ];
     }
 }

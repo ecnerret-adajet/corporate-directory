@@ -1,5 +1,6 @@
 @extends('layouts.front')
 
+
 @section('content')
 <div class="container" style="margin-top: 20px;">
     <div class="row">
@@ -63,4 +64,5 @@
         </div>
     </div>
 </div>
+
 @endsection
