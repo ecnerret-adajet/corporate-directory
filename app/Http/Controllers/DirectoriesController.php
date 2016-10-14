@@ -40,8 +40,15 @@ class DirectoriesController extends Controller
         $companies = Company::all();
         $statuses = Status::all();
         $departments = Department::lists('name','id');
-    
-        return view('directories.index', compact('directories','companies','departments','statuses'))
+
+
+      
+
+        return view('directories.index', compact('directories',
+            'check_status',
+            'companies',
+            'departments',
+            'statuses'))
         ->with('i');
     }
 

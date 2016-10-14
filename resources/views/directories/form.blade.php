@@ -147,12 +147,12 @@
 
                      <div class="form-group">
                             <label class="col-md-4 control-label"> 
-                            {!! Form::label('statuses_list', 'Status:')  !!} 
+                            {!! Form::label('status_list', 'Status:')  !!} 
                             </label>
 
                             <div class="col-md-6 selectContainer">
                   
-                         {!! Form::select('statuses_list[]', $statusesx, null, ['class' => 'form-control', 'placeholder' => '-- Select Status --']) !!}
+                         {!! Form::select('status_list[]', $statusesx, null, ['class' => 'form-control', 'placeholder' => '-- Select Status --']) !!}
 
                   
                                 

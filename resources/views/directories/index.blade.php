@@ -19,19 +19,22 @@
   <div class="panel-body">
 
 
-@foreach($directories->chunk(4) as $items)
+
+@forelse($directories->chunk(4) as $items)
   <div class="row">
-  		    @foreach($items as $item)
+  		    @foreach($items as $item)  
   <div class="col-md-3" style="padding:5px;">
-  		<div class="panel panel-info">
+  		<div class="panel @foreach($item->statuses as $status)
+          {{  is_null($status->name) ? : 'panel-danger'  }}
+        @endforeach panel-info">
   <div class="panel-heading">
     <h3 class="panel-title">
     		@foreach($item->companies as $company)
     			{{$company->name}}
     		@endforeach
 
-        <a href="#" data-toggle="modal" data-target=".directory-{{$item->id}}-modal">
-        <i class="fa fa-eye pull-right" aria-hidden="true"></i>
+        <a class="btn-xs btn-primary btn pull-right" style="color: #fff" href="" data-toggle="modal" data-target=".directory-{{$item->id}}-modal">
+         View
         </a>
     </h3>
   </div>
@@ -46,9 +49,12 @@
       <tr>
       <td colspan="2" style="font-size: 12px;">{{str_limit($item->position,25)}}</td>
     </tr>
-    <tr>
-      <td style="font-size: 12px;" class="text-left"><i class="fa fa-calendar-o" aria-hidden="true"></i> Dated Added</td>
-      <td style="font-size: 12px;">{{ ($item->created_at == null ? '00-00-00' : $item->created_at)}}</td>
+   <tr>
+      <td colspan="2" style="font-size: 12px;">
+        <a class="btn btn-info btn-block btn-sm round" href="mailto:{{str_replace(' ', '', $item->email)}}">
+        <i class="fa fa-envelope-o"></i> Email
+        </a>
+      </td>
     </tr>
   </tbody>
 </table> 
@@ -62,9 +68,15 @@
 
 
 		  @endforeach
+@empty
+
+<h2 class="text-center">
+   No Employee Found :(
+</h2>
+
 
   </div><!-- end row -->
-@endforeach
+@endforelse
 
 
 {{ $directories->links() }}
@@ -165,7 +177,7 @@
                   <i class="fa fa-volume-control-phone fa-icon" aria-hidden="true"></i>
               </div>
 
-              <div class="col-md-8 col-xs-8 text-left box-end">
+              <div class="col-md-8 col-xs-8 text-left box">
               <span class="{{ ($item->local == null ? 'no-data' : '')}}">
 
                 {{ ($item->local == null ? 'No local' : $item->local) }}
@@ -175,21 +187,21 @@
 
            <div class="row">
               <div class="col-md-4 col-xs-4 text-right">
-                  <i class="fa fa-volume-control-phone fa-icon" aria-hidden="true"></i>
+                  <i class="fa fa-info-circle fa-icon" aria-hidden="true"></i>
               </div>
-
               <div class="col-md-8 col-xs-8 text-left box-end">
-              <span class="{{ ($item->local == null ? 'no-data' : '')}}"> 
+              <span class="check_status"> 
+
                   @foreach($item->statuses as $status)
                      
-                      @if (count($status->name) === 0)
-                          No Status
+                      @if (isset($status->name))
+                          {{ $status->name }}  
                       @else
-                        $status->name
+                      No Status
                       @endif  
 
-                        @endforeach 
-                 
+                   @endforeach 
+           
                 
               </span>
               </div>
