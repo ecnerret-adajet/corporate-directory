@@ -41,9 +41,6 @@ class DirectoriesController extends Controller
         $statuses = Status::all();
         $departments = Department::lists('name','id');
 
-
-      
-
         return view('directories.index', compact('directories',
             'check_status',
             'companies',
